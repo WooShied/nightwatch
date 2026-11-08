@@ -1,0 +1,210 @@
+# nightwatch default rules
+#
+# Each rule maps to MITRE ATT&CK techniques (https://attack.mitre.org).
+# Fields you can match on: source, action, user, src_ip, host, plus source fields:
+#   auth:    service, method, target_user, command
+#   web:     method, path, path_decoded, status, user_agent
+#   windows: event_id, logon_type, process, command, group, member, new_account
+#
+# Types: match | threshold | distinct | sequence  (see README)
+
+# --------------------------------------------------------------------------- credentials
+
+[[rule]]
+id = "NW-001"
+title = "Brute force: many failed logins from one source"
+severity = "high"
+type = "threshold"
+attack = ["T1110.001"]
+where = { action = "login_failed" }
+group_by = "src_ip"
+threshold = 8
+window = 300
+description = "A single source failed to log in at least 8 times within 5 minutes. Works across SSH and Windows logons."
+response = "Block or rate-limit the source at the edge, confirm no logins succeeded from it (see NW-003), and check whether the targeted accounts have MFA."
+
+[[rule]]
+id = "NW-002"
+title = "Password spray: one source, many usernames"
+severity = "high"
+type = "distinct"
+attack = ["T1110.003"]
+where = { action = "login_failed" }
+group_by = "src_ip"
+distinct = "user"
+threshold = 5
+window = 900
+description = "One source tried at least 5 different usernames within 15 minutes, which is typical of spraying a few common passwords across many accounts."
+response = "Block the source, review which usernames were valid, and force resets for any account that later logged in successfully."
+
+[[rule]]
+id = "NW-003"
+title = "Successful login after repeated failures"
+severity = "critical"
+type = "sequence"
+attack = ["T1110", "T1078"]
+where = { action = "login_failed" }
+then = { action = "login_success" }
+group_by = "src_ip"
+threshold = 5
+window = 1800
+description = "A source failed at least 5 times and then logged in successfully within 30 minutes. The guessing probably worked."
+response = "Treat as a likely compromise: disable or reset the account, kill its sessions, and review everything it did after the successful login."
+
+[[rule]]
+id = "NW-004"
+title = "Direct root login over SSH"
+severity = "high"
+type = "match"
+attack = ["T1078.003"]
+where = { source = "auth", action = "login_success", user = "root" }
+group_by = "src_ip"
+description = "Someone logged in as root directly over SSH. Most hardened systems disable this (PermitRootLogin no)."
+response = "Confirm the login was expected. If not, rotate root credentials and keys, and set PermitRootLogin to no."
+
+[[rule]]
+id = "NW-005"
+title = "Sudo to an interactive root shell"
+severity = "medium"
+type = "match"
+attack = ["T1548.003"]
+where = { action = "sudo", target_user = "root" }
+where_regex = { command = '(?i)((^|/)(ba|z|da|k)?sh(\s|$)|(^|/)su(\s|$)|\s-i(\s|$))' }
+group_by = "user"
+description = "A user used sudo to open a root shell rather than run a single command. Common right after an attacker gains a foothold."
+response = "Confirm the user and session are legitimate, then review shell history and changes made as root."
+
+# --------------------------------------------------------------------------- web
+
+[[rule]]
+id = "NW-006"
+title = "SQL injection attempt"
+severity = "high"
+type = "match"
+attack = ["T1190"]
+where = { source = "web" }
+where_regex = { path_decoded = '''(?i)(union(\s|/\*.*?\*/)+(all\s+)?select|'\s*or\s+'?\d+'?\s*=\s*'?\d|sleep\(\s*\d+\s*\)|benchmark\(|information_schema|;\s*drop\s+table|extractvalue\()''' }
+group_by = "src_ip"
+description = "Request paths contain SQL injection payloads (UNION SELECT, tautologies, time-based probes)."
+response = "Check whether any of these requests returned 200 with unusual response sizes, review the application's database logs, and block the source."
+
+[[rule]]
+id = "NW-007"
+title = "Path traversal or local file inclusion attempt"
+severity = "high"
+type = "match"
+attack = ["T1190"]
+where = { source = "web" }
+where_regex = { path_decoded = '(?i)(\.\./|\.\.\\|/etc/(passwd|shadow)|win\.ini|boot\.ini|php://(filter|input))' }
+group_by = "src_ip"
+description = "Requests try to climb out of the web root or read system files."
+response = "Confirm the responses were errors, not file contents. Block the source and review input handling on the targeted endpoints."
+
+[[rule]]
+id = "NW-008"
+title = "Cross-site scripting probe"
+severity = "medium"
+type = "match"
+attack = ["T1190"]
+where = { source = "web" }
+where_regex = { path_decoded = '(?i)(<script|javascript:|on(error|load|mouseover)\s*=|<svg[^>]*on\w+\s*=)' }
+group_by = "src_ip"
+description = "Request paths contain script injection payloads."
+response = "Verify the affected pages encode output correctly and that a Content-Security-Policy is in place."
+
+[[rule]]
+id = "NW-009"
+title = "Known scanner or attack tool"
+severity = "medium"
+type = "match"
+attack = ["T1595.002"]
+where = { source = "web" }
+where_regex = { user_agent = '(?i)(sqlmap|nikto|nmap|masscan|zgrab|gobuster|dirbuster|wpscan|nuclei|acunetix|feroxbuster|ffuf)' }
+group_by = "src_ip"
+description = "The user agent identifies a vulnerability scanner or brute-forcing tool."
+response = "Block the source. Scanners are often the first step, so look for follow-up requests from the same address."
+
+[[rule]]
+id = "NW-010"
+title = "Content discovery: burst of 404s"
+severity = "low"
+type = "threshold"
+attack = ["T1595.003"]
+where = { source = "web", status = 404 }
+group_by = "src_ip"
+threshold = 25
+window = 120
+description = "One source hit at least 25 missing pages within 2 minutes, which looks like wordlist-driven directory guessing."
+response = "Rate-limit the source and check whether any guessed path returned 200."
+
+[[rule]]
+id = "NW-011"
+title = "Possible web shell access"
+severity = "critical"
+type = "match"
+attack = ["T1505.003"]
+where = { source = "web" }
+where_regex = { path_decoded = '(?i)/(uploads?|images?|tmp|files|media)/[^?]*\.(php\d?|phtml|jsp|aspx?)(\?|$)', status = '^2\d\d$' }
+group_by = "src_ip"
+description = "A script file inside an upload or media folder was requested and executed successfully. Upload folders should never run code."
+response = "Isolate the web server, pull a copy of the file for analysis, remove it, and find out how it was uploaded."
+
+# --------------------------------------------------------------------------- Windows
+
+[[rule]]
+id = "NW-012"
+title = "New local account created"
+severity = "medium"
+type = "match"
+attack = ["T1136.001"]
+where = { action = "user_created" }
+group_by = "host"
+description = "A new user account was created (Windows event 4720)."
+response = "Confirm the account matches an approved request. Unexpected accounts are a common persistence method."
+
+[[rule]]
+id = "NW-013"
+title = "Account added to a privileged group"
+severity = "high"
+type = "match"
+attack = ["T1098.007"]
+where = { action = "group_member_added" }
+where_regex = { group = '(?i)^(administrators|domain admins|enterprise admins|remote desktop users|backup operators)$' }
+group_by = "host"
+description = "An account was added to a privileged local or domain group (Windows event 4732)."
+response = "Remove the membership if it wasn't approved and investigate who made the change and from where."
+
+[[rule]]
+id = "NW-014"
+title = "Security event log cleared"
+severity = "critical"
+type = "match"
+attack = ["T1070.001"]
+where = { action = "log_cleared" }
+group_by = "host"
+description = "The Windows Security log was cleared (event 1102). Attackers do this to remove evidence."
+response = "Treat the host as compromised. Pull logs from your SIEM or forwarder for the period before the clear."
+
+[[rule]]
+id = "NW-015"
+title = "Encoded PowerShell command"
+severity = "high"
+type = "match"
+attack = ["T1059.001", "T1027.010"]
+where = { action = "process" }
+where_regex = { command = '(?i)powershell(\.exe)?["\s].*\s-(e|en|enc|enco|encod|encode|encoded|encodedc\w*)\s+[A-Za-z0-9+/=]{16,}' }
+group_by = "host"
+description = "PowerShell ran with a Base64-encoded command, a common way to hide what a script does."
+response = "Decode the command (it's UTF-16LE Base64), check what it downloads or runs, and review the parent process."
+
+[[rule]]
+id = "NW-016"
+title = "Download cradle or living-off-the-land transfer"
+severity = "high"
+type = "match"
+attack = ["T1105"]
+where = { action = "process" }
+where_regex = { command = '(?i)(invoke-webrequest|\biwr\b|downloadstring|downloadfile|certutil(\.exe)?\s.*-urlcache|bitsadmin(\.exe)?\s.*/transfer)' }
+group_by = "host"
+description = "A built-in tool was used to download a file from the internet."
+response = "Find the downloaded file and the URL it came from, and block the destination if it's malicious."

@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nightwatch"
+version = "0.1.0"
+description = "Log triage that hunts for attacker behavior in auth, web and Windows logs and maps it to MITRE ATT&CK."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Aadil Rashid" }]
+keywords = ["security", "blue-team", "soc", "log-analysis", "detection", "mitre-attack", "dfir"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Environment :: Console",
+  "Topic :: Security",
+  "Topic :: System :: Logging",
+]
+dependencies = []
+
+[project.scripts]
+nightwatch = "nightwatch.cli:main"
+
+[tool.setuptools]
+packages = ["nightwatch"]
+
+[tool.setuptools.package-data]
+nightwatch = ["rules/*.toml"]

